@@ -23,6 +23,8 @@ class Sprite {
 
     update(){
         this.draw()
+
+        this.position.x += this.velocity.x
         this.position.y = this.position.y + this.velocity.y
         
         if (this.position.y + this.height + this.velocity.y >= canvas.height){
@@ -70,6 +72,26 @@ animate()
 
 
 //Event Listeners
+
+// grab the key we are currently pressing with event.key and if that key is equal
+//to 'd' on the keyboard
+// then call player.velocity on the x axis equal to 1 meaning we will be 
+// moving 1 pixel for every frame we loop over within the 'animate' loop
 window.addEventListener('keydown', (event) => {
+    switch(event.key){
+        case 'd':
+            player.velocity .x = 1
+            break
+    }
+    console.log(event.key)
+})
+
+
+window.addEventListener('keyup', (event) => {
+    switch(event.key){
+        case 'd':
+            player.velocity .x = 0
+            break
+    }
     console.log(event.key)
 })
