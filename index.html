@@ -4,11 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <link rel="stylesheet" href="/style.css"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Kung Fu Chicken Street Fighter 1</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-<canvas></canvas>
+    <!-- main container div  -->
+    <div style="position: relative;
+        display: inline-block;">
+        <!-- head container div  -->
+        <div style="position: absolute;
+                display: flex;
+                width: 100%;
+                align-items: center;
+                padding: 20px;">
+            <!-- player health  -->
+            <div style="background-color: yellow;
+                height: 30px;
+                width: 100%;">
+            </div>
+            <!-- timer  -->
+            <div style="background-color: red;
+                width: 100px;
+                height: 100px;
+                flex-shrink: 0;">
+            </div>
+            <!-- enemy health  -->
+            <div style="background-color: yellow;
+                height: 30px;
+                width: 100%;">
+            </div>
+            <div></div>
+        </div>
+        <canvas></canvas>
+    </div>
 <script src="index.js"></script>
-    
 </body>
