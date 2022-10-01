@@ -1,4 +1,3 @@
-# Kung Fu Chicken Street Fighter 1
+# Kung Fu Street Fighter 1
 
-I have decided to build a fighting game and it will be called
-"Kung Fu Chicken Street Fighter 1"
+I have decided to build a street fighter style game where the characters have magic capabilities
