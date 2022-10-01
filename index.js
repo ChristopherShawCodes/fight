@@ -8,61 +8,17 @@ canvas.height = 576
 c.fillRect(0,0, canvas.width, canvas.height)
 
 const gravity = 0.7
+//Background -----------------------------------------------------------
+const background = new Sprite({
+    position: {
+        x:0,
+        y:0
+    },
+    imageSrc: '/images/Fighting Game Assets/background.png'
+})
 
-class Sprite {
-    constructor({position,velocity,color = 'red',offset}) {
-        this.position = position
-        this.velocity = velocity
-        this.width = 50
-        this.height = 150
-        this.lastKey
-        this.attackBox = {
-            position: {
-                x: this.position.x,
-                y: this.position.y
-            },
-            offset,
-            width: 100,
-            height: 50,
-        }
-        this.color = color
-        this.isAttacking
-    }
-
-    draw(){
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-        //attack box is drawn here
-        if (this.isAttacking) {
-        c.fillStyle = 'green'
-        c.fillRect(this.attackBox.position.x, this.attackBox.position.y , this.attackBox.width, this.attackBox.height)
-    } 
-}
-
-    update(){
-        this.draw()
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
-
-        this.position.x += this.velocity.x
-        this.position.y = this.position.y + this.velocity.y
-        
-        if (this.position.y + this.height + this.velocity.y >= canvas.height){
-            this.velocity.y = 0
-        } else this.velocity.y += gravity
-    
-    }
-    attack() {
-        this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100)
-    }
-}
-
-
-const player = new Sprite({
+//Player & Enemy -----------------------------------------------------
+const player = new Fighter({
     position:{
     x: 0,
     y: 0
@@ -77,7 +33,7 @@ const player = new Sprite({
     }
 }) 
 
-const enemy = new Sprite({
+const enemy = new Fighter({
     position:{
     x: 400,
     y: 100
@@ -109,22 +65,14 @@ const keys = {
     }
 }
 
+decreaseTimer()
 
-function rectangularCollision({rectangle1,rectangle2}) {
-    return (
-        rectangle1.attackBox.position.x + rectangle1.attackBox.width >= 
-        rectangle2.position.x && rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width && 
-        rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y
-        && rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height 
-    )
-}
-
-
-
+//animation function -----------------------------------------------------------------
 function animate() {
     window.requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0,0, canvas.width, canvas.height)
+    background.update()
     player.update()
     enemy.update()
 
@@ -133,43 +81,52 @@ function animate() {
     enemy.velocity.x = 0
 
 
-//Player  Movement
+//Player  Movement ----------------------------------------------------------
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5
     }
 
-    //Enemy Movement
+//Enemy Movement -----------------------------------------------------------
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -5
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
     }
 
-    //Detect for collision
+//Detect for collision -----------------------------------------------------
     if (rectangularCollision({
         rectangle1: player,
         rectangle2: enemy
     }) &&
         player.isAttacking)  {
         player.isAttacking = false
-        console.log('player attacked')
+        enemy.health -= 20
+        document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
+
+
     if (rectangularCollision({
         rectangle1: enemy,
         rectangle2: player
     }) &&
         enemy.isAttacking)  {
         enemy.isAttacking = false
-        console.log('enemy attacked')
+        player.health -= 20
+        document.querySelector('#playerHealth').style.width = player.health + '%'
+    }
+
+//end game based on health ---------------------------------------------------
+    if (enemy.health <= 0 || player.health <= 0){
+        determineWinner({player,enemy,timerId})
     }
 }
 
 animate()
 
 
-//Event Listeners
+//Event Listeners ------------------------------------------------------------
 
 // grab the key we are currently pressing with event.key and if that key is equal
 //to 'd' on the keyboard
@@ -207,13 +164,14 @@ window.addEventListener('keydown', (event) => {
             enemy.velocity.y = -20
             break
         case 'ArrowDown':
-            enemy.isAttacking = true
+            // enemy.isAttacking = true
+            enemy.attack()
             break
     }
     console.log(event.key)
 })
 
-
+//Key Up --------------------------------------------------------------------
 window.addEventListener('keyup', (event) => {
     //player 
     switch(event.key){
