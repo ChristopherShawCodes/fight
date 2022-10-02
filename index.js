@@ -234,8 +234,11 @@ function animate() {
         player.isAttacking && player.framesCurrent === 4)  {
         enemy.takeHit()
         player.isAttacking = false
-        document.querySelector('#enemyHealth').style.width = enemy.health + '%'
-        
+        //GSAP is imported via CDN on index.html and is used for animations
+        // in this case it is slowing down the health bar when a player gets hit
+        gsap.to('#enemyHealth', {
+            width: enemy.health + '%'
+        })
     }
 
 
@@ -253,7 +256,9 @@ function animate() {
         {
         player.takeHit()
         enemy.isAttacking = false
-        document.querySelector('#playerHealth').style.width = player.health + '%'
+        gsap.to('#playerHealth', {
+            width: player.health + '%'
+        })
     }
 
         //If Player two Misses player one with the attack
