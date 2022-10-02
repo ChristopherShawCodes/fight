@@ -13,7 +13,7 @@ class Sprite {
         this.framesMax = framesMax
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 8
+        this.framesHold = 15
         this.offset = offset
     }
 
@@ -25,9 +25,9 @@ class Sprite {
             // divide the width by how many frames are in the png. in this case it is 6. 
             this.image.width /this.framesMax,
             this.image.height,
-            this.position.x -this.offset.x,
+            this.position.x - this.offset.x,
             this.position.y - this.offset.y,
-            this.image.width /this.framesMax * this.scale,
+            this.image.width / this.framesMax * this.scale,
             this.image.height * this.scale
             )
     } 
@@ -57,8 +57,8 @@ class Fighter extends Sprite{
         color = 'red',
         imageSrc,
         scale = 1, 
-        framesMax =1,
-        offset ={x:0,y:0},
+        framesMax = 1,
+        offset = {x:0,y:0},
         sprites,
         attackBox = {offset: {}, width: undefined, height: undefined}
     }) {
@@ -88,7 +88,7 @@ class Fighter extends Sprite{
         this.health = 100
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 8
+        this.framesHold = 15
         this.sprites = sprites
         this.dead = false
         for (const sprite in this.sprites) {

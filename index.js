@@ -274,6 +274,8 @@ function animate() {
 
 animate()
 
+//Refresh page-------------------------------------------------------------------------
+
 const refreshButton = document.querySelector('.refresh-button');
 
 const refreshPage = () => {
