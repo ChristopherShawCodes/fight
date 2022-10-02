@@ -11,6 +11,7 @@ function rectangularCollision({rectangle1,rectangle2}) {
 function determineWinner({player,enemy, timerId}){
     clearTimeout(timerId)
     document.querySelector('#displayText').style.display = 'flex'
+    document.querySelector('#restart').style.display = 'flex'
     if (player.health === enemy.health){
         document.querySelector('#displayText').innerHTML = 'Tie'
     } else if (player.health > enemy.health) {
