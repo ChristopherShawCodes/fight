@@ -30,7 +30,7 @@ const shop = new Sprite({
 //Player & Enemy -----------------------------------------------------
 const player = new Fighter({
     position:{
-    x: 0,
+    x: 200,
     y: 0
 },
     velocity: {
@@ -64,13 +64,17 @@ const player = new Fighter({
         fall: {
             imageSrc: '/images/Fighting Game Assets/SamuraiMack/Fall.png',
             framesMax: 2
+        },
+        attack1: {
+            imageSrc: '/images/Fighting Game Assets/SamuraiMack/attack1.png',
+            framesMax: 6
         }
     }
 }) 
 
 const enemy = new Fighter({
     position:{
-    x: 400,
+    x: 700,
     y: 100
 },
     velocity: {
@@ -81,6 +85,35 @@ const enemy = new Fighter({
     offset: {
         x: -50,
         y: 0
+    },
+    imageSrc: '/images/Fighting Game Assets/kenji/Idle.png',
+    framesMax: 4,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 167
+    },
+    sprites: {
+        idle: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Idle.png',
+            framesMax: 4
+        },
+        run: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Run.png',
+            framesMax: 8
+        },
+        jump: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Jump.png',
+            framesMax: 2
+        },
+        fall: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Fall.png',
+            framesMax: 2
+        },
+        attack1: {
+            imageSrc: '/images/Fighting Game Assets/kenji/attack1.png',
+            framesMax: 4
+        }
     }
 }) 
 
@@ -110,14 +143,14 @@ function animate() {
     background.update()
     shop.update()
     player.update()
-    // enemy.update()
+    enemy.update()
 
 
     player.velocity.x = 0
     enemy.velocity.x = 0
 
 
-//Player  Movement ----------------------------------------------------------
+//Player Movement/ Player One ----------------------------------------------------------
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5
         player.switchSprite('run')
@@ -128,7 +161,7 @@ function animate() {
         player.switchSprite('idle')
     }
 
-//For Jump Animation
+//For Jump Animation For Player One 
     if (player.velocity.y < 0){
         player.switchSprite('jump')
     } else if (player.velocity.y > 0){
@@ -136,11 +169,22 @@ function animate() {
     }
 
 
-//Enemy Movement -----------------------------------------------------------
+//Enemy Movement / Player Two -----------------------------------------------------------
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -5
+        enemy.switchSprite('run')
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
+        enemy.switchSprite('run')
+    } else {
+        enemy.switchSprite('idle')
+    }
+
+    //For Jump Animation For Player Two----------------------
+    if (enemy.velocity.y < 0){
+        enemy.switchSprite('jump')
+    } else if (enemy.velocity.y > 0){
+        enemy.switchSprite('fall')
     }
 
 //Detect for collision -----------------------------------------------------
