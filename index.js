@@ -68,6 +68,10 @@ const player = new Fighter({
         attack1: {
             imageSrc: '/images/Fighting Game Assets/SamuraiMack/attack1.png',
             framesMax: 6
+        },
+        takeHit: {
+            imageSrc: '/images/Fighting Game Assets/SamuraiMack/Take Hit - white silhouette.png',
+            framesMax: 4
         }
     },
     attackBox: {
@@ -121,14 +125,18 @@ const enemy = new Fighter({
         attack1: {
             imageSrc: '/images/Fighting Game Assets/kenji/attack1.png',
             framesMax: 4
+        },
+        takeHit: {
+            imageSrc: './images/Fighting Game Assets/kenji/Take hit.png',
+            framesMax: 3
         }
     },
     attackBox: {
         offset: {
-            x: 0,
-            y: 0,
+            x: -170,
+            y: 50,
         },
-        width: 100,
+        width: 170,
         height: 50
     }
 }) 
@@ -203,32 +211,39 @@ function animate() {
         enemy.switchSprite('fall')
     }
 
-//Detect for collision -----------------------------------------------------
+//Detect For Collision && When A Player Gets Hit-----------------------------------------------------
     if (rectangularCollision({
         rectangle1: player,
         rectangle2: enemy
     }) &&
         player.isAttacking && player.framesCurrent === 4)  {
+        enemy.takeHit()
         player.isAttacking = false
-        enemy.health -= 20
         document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
 
 
-    //If Player Misses the other player with the attack
+    //If Player One misses player two with the attack
     if (player.isAttacking && player.framesCurrent ===4){
         player.isAttacking = false
     }
-
+//This is where the player gets hit
     if (rectangularCollision({
         rectangle1: enemy,
         rectangle2: player
     }) &&
-        enemy.isAttacking)  {
+        enemy.isAttacking && 
+        enemy.framesCurrent === 2)  
+        {
+        player.takeHit()
         enemy.isAttacking = false
-        player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%'
     }
+
+        //If Player two Misses player one with the attack
+        if (enemy.isAttacking && enemy.framesCurrent === 2){
+            enemy.isAttacking = false
+        }
 
 //end game based on health ---------------------------------------------------
     if (enemy.health <= 0 || player.health <= 0){
