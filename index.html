@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     
     <title>Kung Fu Street Fighter 1</title>
     <style>
         *{
             box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
         }
     </style>
 </head>
@@ -26,45 +30,64 @@
 
             <!-- player health  -->
             <div style="position: relative; 
-            height: 30px; 
             width: 100%; 
             display: flex; 
             justify-content: flex-end; 
-            border: 2px solid white;">
+            border-left: 4px solid white;
+            border-top: 4px solid white;
+            border-bottom: 4px solid white;
+            border-right: 1px solid white;
+            border-radius: 1px;
+            opacity: 80%">
                 <div 
-                style="background-color: gray;
-                height: 30px; 
-                width: 100%">
+                    style="background-color: red;
+                    height: 30px; 
+                    width: 100%">
                 </div>
-                <div id="playerHealth" style="position: absolute; background: yellow; top: 0; bottom:0;right: 0; width: 100%;"></div>
+                <div id="playerHealth" 
+                    style="position: absolute;
+                    background: #818CF8; 
+                    top: 0; 
+                    bottom:0;
+                    right: 0; 
+                    width: 100%;">
+                </div>
             </div>
 
 
             <!-- timer  -->
             <div id="timer"
-                style="background-color: red;
+                style="background-color: black;
                 width: 100px;
-                height: 100px;
+                height: 50px;
+                color: white;
                 flex-shrink: 0;
                 display: flex;
                 align-items: center;
-                justify-content: center;"
+                justify-content: center;
+                border: 2px solid white;
+                opacity: 60%;
+                border-radius: 5px;"
                 >
                 10
             </div>
 
             <!-- enemy health  -->
             <div style="position: relative; 
-            height: 30px; 
             width: 100%;
-            border: 2px solid white;">
+            border-right: 4px solid white;
+            border-top: 4px solid white;
+            border-bottom: 4px solid white;
+            border-left: 1px solid white;
+            border-radius: 1px;
+            opacity: 80%">
                 <div 
-                style="background-color: gray; 
+                style="background-color: red; 
                 height: 30px;">
                 </div>
                 <div id="enemyHealth" 
                 style="position: absolute; 
-                background: yellow; 
+                background: #818CF8; 
                 top: 0; 
                 bottom:0; 
                 left:0; 

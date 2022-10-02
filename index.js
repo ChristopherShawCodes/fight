@@ -28,6 +28,7 @@ const shop = new Sprite({
 })
 
 //Player & Enemy -----------------------------------------------------
+//Player One---------------------------------------------------
 const player = new Fighter({
     position:{
     x: 200,
@@ -48,6 +49,7 @@ const player = new Fighter({
         x: 215,
         y: 157
     },
+    //Sprites for Player One ---------------------------------------------------
     sprites: {
         idle: {
             imageSrc: '/images/Fighting Game Assets/SamuraiMack/Idle.png',
@@ -72,6 +74,10 @@ const player = new Fighter({
         takeHit: {
             imageSrc: '/images/Fighting Game Assets/SamuraiMack/Take Hit - white silhouette.png',
             framesMax: 4
+        },
+        death: {
+            imageSrc: '/images/Fighting Game Assets/SamuraiMack/Death.png',
+            framesMax: 6
         }
     },
     attackBox: {
@@ -84,6 +90,7 @@ const player = new Fighter({
     }
 }) 
 
+//Player Two ----------------------------------------------------------------------------
 const enemy = new Fighter({
     position:{
     x: 700,
@@ -105,6 +112,7 @@ const enemy = new Fighter({
         x: 215,
         y: 167
     },
+    //Sprites For Player Two ------------------------------------------------
     sprites: {
         idle: {
             imageSrc: '/images/Fighting Game Assets/kenji/Idle.png',
@@ -129,7 +137,11 @@ const enemy = new Fighter({
         takeHit: {
             imageSrc: './images/Fighting Game Assets/kenji/Take hit.png',
             framesMax: 3
-        }
+        },
+        death: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Death.png',
+            framesMax: 7
+        },
     },
     attackBox: {
         offset: {
@@ -140,7 +152,7 @@ const enemy = new Fighter({
         height: 50
     }
 }) 
-
+//--------------------------------------------------------End Of Player Two
 
 const keys = {
     a: {
@@ -166,6 +178,9 @@ function animate() {
     c.fillRect(0,0, canvas.width, canvas.height)
     background.update()
     shop.update()
+    //Added an overlay to help with contrast of the players to background. 0.15 = transparency value
+    c.fillStyle = 'rgba(255,255,255,0.15)'
+    c.fillRect(0,0, canvas.width, canvas.height)
     player.update()
     enemy.update()
 
@@ -220,6 +235,7 @@ function animate() {
         enemy.takeHit()
         player.isAttacking = false
         document.querySelector('#enemyHealth').style.width = enemy.health + '%'
+        
     }
 
 
@@ -249,7 +265,7 @@ function animate() {
     if (enemy.health <= 0 || player.health <= 0){
         determineWinner({player,enemy,timerId})
     }
-}
+}//end of animation
 
 animate()
 
@@ -261,7 +277,8 @@ animate()
 // then call player.velocity on the x axis equal to 1 meaning we will be 
 // moving 1 pixel for every frame we loop over within the 'animate' loop
 window.addEventListener('keydown', (event) => {
-    console.log(event.key)
+    if (!player.dead) {
+
     switch(event.key){
         case 'd':
             keys.d.pressed = true
@@ -279,7 +296,11 @@ window.addEventListener('keydown', (event) => {
         case ' ':
             player.attack()
             break
+    }
+}
+    if(!enemy.dead) {
         //Enemy Keys
+        switch(event.key) {
         case 'ArrowRight':
             keys.ArrowRight.pressed = true
             enemy.lastKey = 'ArrowRight'
@@ -295,8 +316,8 @@ window.addEventListener('keydown', (event) => {
             // enemy.isAttacking = true
             enemy.attack()
             break
+        }  
     }
-    console.log(event.key)
 })
 
 //Key Up --------------------------------------------------------------------
