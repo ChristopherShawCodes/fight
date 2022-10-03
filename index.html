@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
@@ -17,8 +18,9 @@
     </style>
 </head>
 <body>
+    <div class="background">
     <!-- main container div  -->
-    <div style="position: relative;
+    <div id="main" style="position: relative;
         display: inline-block;">
         <!-- head container div  -->
         <div style="position: absolute;
@@ -26,8 +28,6 @@
                 width: 100%;
                 align-items: center;
                 padding: 20px;">
-
-
             <!-- player health  -->
             <div style="position: relative; 
             width: 100%; 
@@ -94,7 +94,6 @@
                 right: 0;"></div>
 
             </div>
-            <div></div>
         </div>
         <div id="displayText" 
         style="position: absolute; 
@@ -126,6 +125,18 @@
         color: white;">Restart Game</button></div>
         <canvas></canvas>
     </div>
+    <div class="row" style="display: flex; justify-content: space-around">
+    <div id="left" style="background-color: gray; opacity: 70%; border: 1px solid white; margin-top: 10px;">
+        <h3 style="color: white;">Player One </h3>
+        <p>Move Player: A,W,D</p>
+        <p>Attack: Space & M</p>
+    </div>
+    <div id="right" style="background-color: gray; opacity: 70%; border: 1px solid white; margin-top: 10px;"> 
+        <h3>Player Two</h3>
+        <p>Move Player: Arrow Keys</p>
+        <p>Attack:Down-Arrow & 0</p></div>
+    </div>      
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/classes.js"></script>

@@ -44,7 +44,6 @@ class Sprite {
     }
 }
 
-
     update(){
         this.draw()
         this.animateFrames()
@@ -88,7 +87,7 @@ class Fighter extends Sprite{
         this.health = 100
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 15
+        this.framesHold = 8
         this.sprites = sprites
         this.dead = false
         for (const sprite in this.sprites) {
@@ -125,6 +124,11 @@ class Fighter extends Sprite{
         this.switchSprite('attack1')
         this.isAttacking = true
     }
+    
+    attack2() {
+        this.switchSprite('attack2')
+        this.isAttacking = true
+    }
 
     takeHit(){
         this.health -= 20
@@ -144,6 +148,11 @@ switchSprite(sprite) {
     //Overriding all other animations with the attack animation
     if (this.image === this.sprites.attack1.image && 
         this.framesCurrent < this.sprites.attack1.framesMax - 1) 
+    return
+
+    //Overriding all other animations with the attack2 animation
+    if (this.image === this.sprites.attack2.image && 
+        this.framesCurrent < this.sprites.attack2.framesMax - 1) 
     return
 
     //override when fighter gets hit
@@ -184,6 +193,13 @@ switchSprite(sprite) {
             if (this.image !== this.sprites.attack1.image){
             this.image = this.sprites.attack1.image
             this.framesMax = this.sprites.attack1.framesMax
+            this.framesCurrent = 0
+            }
+        break;
+        case 'attack2':
+            if (this.image !== this.sprites.attack2.image){
+            this.image = this.sprites.attack2.image
+            this.framesMax = this.sprites.attack2.framesMax
             this.framesCurrent = 0
             }
         break;

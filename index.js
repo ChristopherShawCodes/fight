@@ -68,7 +68,11 @@ const player = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: '/images/Fighting Game Assets/SamuraiMack/attack1.png',
+            imageSrc: '/images/Fighting Game Assets/SamuraiMack/Attack1.png',
+            framesMax: 6
+        },
+        attack2: {
+            imageSrc: '/images/Fighting Game Assets/SamuraiMack/Attack2.png',
             framesMax: 6
         },
         takeHit: {
@@ -131,7 +135,11 @@ const enemy = new Fighter({
             framesMax: 2
         },
         attack1: {
-            imageSrc: '/images/Fighting Game Assets/kenji/attack1.png',
+            imageSrc: '/images/Fighting Game Assets/kenji/Attack1.png',
+            framesMax: 4
+        },
+        attack2: {
+            imageSrc: '/images/Fighting Game Assets/kenji/Attack2.png',
             framesMax: 4
         },
         takeHit: {
@@ -309,6 +317,9 @@ window.addEventListener('keydown', (event) => {
         case ' ':
             player.attack()
             break
+        case 'm':
+            player.attack2()
+            break
     }
 }
     if(!enemy.dead) {
@@ -328,6 +339,8 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowDown':
             // enemy.isAttacking = true
             enemy.attack()
+        case '0':
+            enemy.attack2()
             break
         }  
     }

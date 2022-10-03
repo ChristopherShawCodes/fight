@@ -7,3 +7,29 @@ canvas {
   display: block;
 }
 
+.background{
+  background-image: url('/images/wallpaper-art.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#main{
+  border: 10px solid white;
+  margin-left: 15%;
+  margin-top: 80px;
+}
+
+p ,h3{
+  color: white;
+  margin-left: 5px;
+}
+
+
+#left{
+  margin-left: 38px;
+}
+
+#right{
+  margin-right: 50px;
+}
