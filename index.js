@@ -199,10 +199,10 @@ function animate() {
 
 //Player Movement/ Player One ----------------------------------------------------------
     if (keys.a.pressed && player.lastKey === 'a') {
-        player.velocity.x = -5
+        player.velocity.x = -6
         player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
-        player.velocity.x = 5
+        player.velocity.x = 6
         player.switchSprite('run')
     } else{
         player.switchSprite('idle')
